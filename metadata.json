@@ -1,0 +1,6 @@
+{
+  "name": "Makassar Ducting Survey V4 — FGD Edition",
+  "description": "Sistem Informasi Survei & Penataan Kabel Udara Terpadu (Ducting) Kota Makassar dengan scoring prioritas P1-P4, Peta GIS interaktif, FGD-1 & FGD-2 validation log, Ground Check GPS & foto, serta Export Kajian Master Excel/CSV.",
+  "requestFramePermissions": ["geolocation", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
