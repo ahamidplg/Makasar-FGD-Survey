@@ -22,6 +22,7 @@ interface GroundCheckTabProps {
   onSaveGroundCheck: (record: SurveyRecord) => void;
   presetLat?: number | null;
   presetLng?: number | null;
+  currentUser?: { name: string; role: string; agency: string } | null;
 }
 
 export const GroundCheckTab: React.FC<GroundCheckTabProps> = ({
@@ -29,6 +30,7 @@ export const GroundCheckTab: React.FC<GroundCheckTabProps> = ({
   onSaveGroundCheck,
   presetLat,
   presetLng,
+  currentUser,
 }) => {
   const [selectedExistingId, setSelectedExistingId] = useState<string>('NEW');
 
@@ -53,9 +55,16 @@ export const GroundCheckTab: React.FC<GroundCheckTabProps> = ({
   const [drainase, setDrainase] = useState<TrotoarDrainaseType>('Ada');
   const [kawasan, setKawasan] = useState('Komersial / Pusat Bisnis');
   const [hambatan, setHambatan] = useState('Kabel optik menumpuk pada tiang sudut persimpangan');
-  const [surveyor, setSurveyor] = useState('Tim Lapangan Ground Check');
+  const [surveyor, setSurveyor] = useState(currentUser?.name || 'Tim Lapangan Ground Check');
   const [tanggal, setTanggal] = useState(new Date().toISOString().split('T')[0]);
   const [catatan, setCatatan] = useState('Hasil survei fisik lapangan terverifikasi.');
+
+  // Update surveyor when logged in user changes
+  useEffect(() => {
+    if (currentUser?.name) {
+      setSurveyor(currentUser.name);
+    }
+  }, [currentUser]);
 
   const [photos, setPhotos] = useState<string[]>([]);
   const [gpsAccuracy, setGpsAccuracy] = useState<number | null>(null);

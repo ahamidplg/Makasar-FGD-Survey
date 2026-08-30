@@ -111,3 +111,16 @@ export interface RekapKecamatan {
   tiang_telkom_total: number;
   tiang_pln_total: number;
 }
+
+export type UserRole = 'admin' | 'surveyor';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  roleTitle: string;
+  agency: string;
+  avatarBg: string;
+  initials: string;
+}

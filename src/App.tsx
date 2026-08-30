@@ -8,7 +8,8 @@ import { GroundCheckTab } from './components/GroundCheckTab';
 import { Fgd2Tab } from './components/Fgd2Tab';
 import { FinalExportTab } from './components/FinalExportTab';
 import { SurveyDetailModal } from './components/SurveyDetailModal';
-import { TabType, SurveyRecord, FgdRecord } from './types';
+import { LoginPage } from './components/LoginPage';
+import { TabType, SurveyRecord, FgdRecord, User } from './types';
 import {
   loadSurveyRecords,
   saveSurveyRecords,
@@ -16,12 +17,28 @@ import {
   saveFgdRecords,
   resetToSampleData,
 } from './utils/storage';
+import { getStoredUser, saveStoredUser, DEFAULT_SYSTEM_ACCOUNTS } from './utils/auth';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('dashboard');
   const [surveys, setSurveys] = useState<SurveyRecord[]>([]);
   const [fgdRecords, setFgdRecords] = useState<FgdRecord[]>([]);
   const [selectedSurvey, setSelectedSurvey] = useState<SurveyRecord | null>(null);
+
+  // Authentication state
+  const [currentUser, setCurrentUser] = useState<User | null>(() => {
+    return getStoredUser() || {
+      id: DEFAULT_SYSTEM_ACCOUNTS[0].id,
+      name: DEFAULT_SYSTEM_ACCOUNTS[0].name,
+      email: DEFAULT_SYSTEM_ACCOUNTS[0].email,
+      role: DEFAULT_SYSTEM_ACCOUNTS[0].role,
+      roleTitle: DEFAULT_SYSTEM_ACCOUNTS[0].roleTitle,
+      agency: DEFAULT_SYSTEM_ACCOUNTS[0].agency,
+      avatarBg: DEFAULT_SYSTEM_ACCOUNTS[0].avatarBg,
+      initials: DEFAULT_SYSTEM_ACCOUNTS[0].initials,
+    };
+  });
+  const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
   // Cross-tab coordinate passing (from GIS map to Ground Check)
   const [presetLat, setPresetLat] = useState<number | null>(null);
@@ -34,6 +51,22 @@ export default function App() {
     setSurveys(loadedSurveys);
     setFgdRecords(loadedFgds);
   }, []);
+
+  const handleLogin = (user: User) => {
+    setCurrentUser(user);
+    saveStoredUser(user);
+    setShowLoginModal(false);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    saveStoredUser(null);
+    setShowLoginModal(true);
+  };
+
+  const handleSwitchAccount = () => {
+    setShowLoginModal(true);
+  };
 
   // Save surveys whenever they change
   const handleUpdateSurveys = (newSurveys: SurveyRecord[]) => {
@@ -125,6 +158,10 @@ export default function App() {
     setActiveTab('ground');
   };
 
+  if (!currentUser || showLoginModal) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col text-slate-900 font-sans antialiased selection:bg-indigo-600 selection:text-white">
       {/* Top Navigation */}
@@ -134,6 +171,9 @@ export default function App() {
         onResetData={handleResetSample}
         totalRuas={surveys.length}
         totalP1={surveys.filter((s) => (s.prioritas || '').startsWith('P1')).length}
+        currentUser={currentUser}
+        onLogout={handleLogout}
+        onSwitchAccount={handleSwitchAccount}
       />
 
       {/* Main Container */}
@@ -180,6 +220,7 @@ export default function App() {
             onSaveGroundCheck={handleSaveSingleSurvey}
             presetLat={presetLat}
             presetLng={presetLng}
+            currentUser={currentUser}
           />
         )}
 
@@ -220,10 +261,11 @@ export default function App() {
             <span className="text-slate-500 font-mono text-[11px]">V4 FGD Master Study</span>
           </div>
           <div className="text-slate-400 text-[11px]">
-            Pemerintah Kota Makassar &copy; {new Date().getFullYear()} • Dinas PU & Diskominfo Terpadu
+            Pemerintah Kota Makassar &copy; {new Date().getFullYear()} • Kokek Konsulting
           </div>
         </div>
       </footer>
     </div>
   );
 }
+

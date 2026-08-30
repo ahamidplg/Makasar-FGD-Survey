@@ -7,13 +7,27 @@ Aplikasi ini dirancang untuk mendigitalisasi dan mengotomatisasi seluruh siklus 
 ---
 
 ## 📋 Daftar Isi
-1. [Fitur Utama](#-fitur-utama)
-2. [Tahapan Metodologi Survei](#-tahapan-metodologi-survei)
-3. [Formula Pembobotan & Scoring Prioritas](#-formula-pembobotan--scoring-prioritas)
-4. [Tech Stack](#-tech-stack)
-5. [Struktur Proyek](#-struktur-proyek)
-6. [Panduan Instalasi & Menjalankan](#-panduan-instalasi--menjalankan)
-7. [Format Data & Ekspor](#-format-data--ekspor)
+1. [Akses Login & Manajemen Peran Pengguna](#-akses-login--manajemen-peran-pengguna)
+2. [Fitur Utama](#-fitur-utama)
+3. [Tahapan Metodologi Survei](#-tahapan-metodologi-survei)
+4. [Formula Pembobotan & Scoring Prioritas](#-formula-pembobotan--scoring-prioritas)
+5. [Tech Stack](#-tech-stack)
+6. [Struktur Proyek](#-struktur-proyek)
+7. [Panduan Instalasi & Menjalankan](#-panduan-instalasi--menjalankan)
+8. [Format Data & Ekspor](#-format-data--ekspor)
+
+---
+
+## 🔐 Akses Login & Manajemen Akun (Admin & Surveyor)
+
+Sistem dilengkapi dengan **Portal Akses Otentikasi** khusus untuk 2 jenis akun penugasan resmi:
+
+| Peran (Role) | Nama Pengguna Resmi | Email Kedinasan | Kata Sandi | Lingkup Hak Akses & Tanggung Jawab |
+|:---|:---|:---|:---:|:---|
+| **Administrator** | A Hamid S.Si | `admin@makassar.go.id` | `admin` | Akses penuh seluruh modul (Dashboard, Desk Survey, FGD-1, Ground Check, FGD-2, dan Final Master Export), verifikasi scoring, modifikasi bobot, impor data, dan kelola dataset. |
+| **Surveyor Lapangan** | Andi Rahmat Hidayat | `surveyor@makassar.go.id` | `surveyor` | Khusus input survei fisik lapangan (Ground Check), verifikasi tiang utilitas, geotagging GPS, dan dokumentasi foto kondisi kabel eksisting. |
+
+> 💡 **Registrasi & Pergantian Akun**: Pengguna dapat mendaftarkan akun surveyor/admin baru melalui menu **+ Buat Akun** pada halaman login atau beralih akun kapan saja melalui menu profil di bilah navigasi atas (*Navbar*).
 
 ---
 
@@ -36,7 +50,7 @@ Aplikasi ini dirancang untuk mendigitalisasi dan mengotomatisasi seluruh siklus 
 - Reset instan ke 15 koridor baseline Kota Makassar (Jl. AP Pettarani, Jl. Penghibur, Jl. Somba Opu, Jl. Hertasning, dll.).
 
 ### 4. **Modul FGD-1: Aspirasi & Verifikasi Operator (Tahap 2)**
-- Pencatatan notulensi dan daftar hadir stakeholder (APJATEL, Telkom, PLN, Diskominfo, Dinas PU).
+- Pencatatan notulensi dan daftar hadir stakeholder (APJATEL, Telkom, PLN, Kokek Konsulting).
 - Matriks dukungan operator per ruas jalan (kesiapan migrasi ke kabel tanah).
 - Penilaian kendala teknis dan administrasi dari sudut pandang penyedia layanan jaringan.
 
@@ -174,9 +188,8 @@ Aplikasi mendukung format ekspor terintegrasi:
 
 ---
 
-## 🏛️ Instansi Terkait
+## 🏛️ Instansi & Tim Pelaksana
 - **Pemerintah Kota Makassar**
-- **Dinas Pekerjaan Umum (PU) Kota Makassar**
-- **Dinas Komunikasi dan Informatika (Diskominfo) Kota Makassar**
+- **Kokek Konsulting**
 - **Asosiasi Penyelenggara Jaringan Telekomunikasi (APJATEL) Sulselbarteng**
 - **PT PLN (Persero) UID Sulselrabar**

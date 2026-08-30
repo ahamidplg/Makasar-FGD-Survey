@@ -121,7 +121,7 @@ export const Fgd1Tab: React.FC<Fgd1TabProps> = ({
         <h2 className="text-xl font-bold text-white">🏛️ FGD-1 — Validasi Baseline & Kesepakatan Awal</h2>
         <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl">
           Gunakan FGD-1 untuk memvalidasi data desk survey, menyaring isu strategis, dan menentukan
-          kandidat koridor utama bersama Dinas PU, Diskominfo, APJATEL, Telkom, PLN, dan Balai Jalan.
+          kandidat koridor utama bersama Kokek Konsulting, APJATEL, Telkom, PLN, dan Balai Jalan.
         </p>
       </div>
 
@@ -186,7 +186,7 @@ export const Fgd1Tab: React.FC<Fgd1TabProps> = ({
             </label>
             <input
               type="text"
-              placeholder="Contoh: Dinas PU Kota Makassar, APJATEL Sulsel, PT Telkom Witel Sulsel, PLN UID Sulselrabar"
+              placeholder="Contoh: Kokek Konsulting, APJATEL Sulsel, PT Telkom Witel Sulsel, PLN UID Sulselrabar"
               value={stakeholder}
               onChange={(e) => setStakeholder(e.target.value)}
               className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-slate-800 focus:ring-2 focus:ring-indigo-500"
