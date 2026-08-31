@@ -25,18 +25,9 @@ export default function App() {
   const [fgdRecords, setFgdRecords] = useState<FgdRecord[]>([]);
   const [selectedSurvey, setSelectedSurvey] = useState<SurveyRecord | null>(null);
 
-  // Authentication state
+  // Authentication state - shows login page on first access or when not logged in
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
-    return getStoredUser() || {
-      id: DEFAULT_SYSTEM_ACCOUNTS[0].id,
-      name: DEFAULT_SYSTEM_ACCOUNTS[0].name,
-      email: DEFAULT_SYSTEM_ACCOUNTS[0].email,
-      role: DEFAULT_SYSTEM_ACCOUNTS[0].role,
-      roleTitle: DEFAULT_SYSTEM_ACCOUNTS[0].roleTitle,
-      agency: DEFAULT_SYSTEM_ACCOUNTS[0].agency,
-      avatarBg: DEFAULT_SYSTEM_ACCOUNTS[0].avatarBg,
-      initials: DEFAULT_SYSTEM_ACCOUNTS[0].initials,
-    };
+    return getStoredUser();
   });
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
